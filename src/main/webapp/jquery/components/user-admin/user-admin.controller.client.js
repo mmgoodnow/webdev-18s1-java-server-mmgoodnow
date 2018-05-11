@@ -11,7 +11,7 @@
         template = $('.template');
         $('#createUser').click(createUser);
 
-        var promise = fetch('http://localhost:8080/api/user');
+        var promise = fetch('http://sage.local:8080/api/user');
         promise.then(function (response) {
             return response.json();
         }).then(renderUsers)
@@ -32,7 +32,7 @@
             lastName: lastName
         };
 
-        fetch('http://localhost:8080/api/user', {
+        fetch('http://sage.local:8080/api/user', {
             method: 'post',
             body: JSON.stringify(user),
             headers: {
@@ -47,6 +47,10 @@
             var clone = template.clone();
             clone.find('.username')
                 .html(user.username);
+            clone.find('.firstName')
+                .html(user.firstName);
+            clone.find('.lastName')
+                .html(user.lastName);
             tbody.append(clone);
         }
     }
