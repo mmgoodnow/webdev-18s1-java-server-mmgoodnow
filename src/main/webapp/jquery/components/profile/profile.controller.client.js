@@ -1,69 +1,47 @@
-//IIFE
 (function () {
 
-    jQuery(main);
+	$(main);
+	var userService = new UserServiceClient();
+	var $username;
+	var $firstName;
+	var $lastName;
+	var $updateBtn;
 
-    var tbody;
-    var template;
-    var userService = new UserServiceClient();
+	function main() {
+		$username = $("#username");
+		$firstName = $("#firstName");
+		$lastName = $("#lastName");
+		$updateBtn = $("#updateBtn")
+			.click(updateUser);
+		findUserById(2442);
 
-    function main() {
-        tbody = $('tbody');
-        template = $('.template');
-        $('#createUser').click(createUser);
-        redrawUsers();
-    }
+	}
 
-    function createUser() {
-        var username = $('#usernameFld').val();
-        var password = $('#passwordFld').val();
-        var firstName = $('#firstNameFld').val();
-        var lastName = $('#lastNameFld').val();
+	function updateUser() {
+		var user = {
+			firstName: $firstName.val(),
+			lastName: $lastName.val()
+		};
 
-        var user = {
-            username: username,
-            password: password,
-            firstName: firstName,
-            lastName: lastName
-        };
+		userService.updateUser(2442, user).then(function (response) {
+			if (response === null) {
+				alert("Unable to update");
+			} else {
+				alert("Success!");
+			}
+		});
+	}
 
-		userService.createUser(user).then(redrawUsers);
-
-    }
-
-    function redrawUsers() {
+	function findUserById(id) {
 		userService
-			.findAllUsers()
-			.then(drawUsers);
+			.findUserById(id)
+			.then(renderUser);
 	}
 
-    function drawUsers(users) {
-		tbody.empty();
-        for (var i=0; i<users.length; i++) {
-            var user = users[i];
-            var clone = template.clone();
-            clone.find(".delete").click(deleteUser);
-            clone.find(".edit").click(editUser);
-            clone.find('.username').html(user.username);
-            clone.find('.firstName').html(user.firstName);
-            clone.find('.lastName').html(user.lastName);
-
-            clone
-				.attr("id", user.id)
-				.attr("class", "userRow");
-            tbody.append(clone);
-        }
-    }
-
-    function deleteUser(event) {
-		var button = $(event.currentTarget);
-		var id = button.parent().parent().attr("id");
-		userService.deleteUser(id)
-			.then(redrawUsers);
-	}
-
-	function editUser(event) {
-
+	function renderUser(user) {
+		$username.val(user.username);
+		$firstName.val(user.firstName);
+		$lastName.val(user.lastName);
 	}
 
 })();

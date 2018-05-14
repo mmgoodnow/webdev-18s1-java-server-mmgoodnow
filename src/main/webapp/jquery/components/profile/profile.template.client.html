@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/>
-    <title>User Administration</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          rel="stylesheet"/>
+    <title>Profile</title>
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -15,37 +16,44 @@
 </head>
 <body>
 <div class="container">
-    <h1 id="title">User Admin</h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Username</th>
-            <th>Password</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th></th>
-        </tr>
-        <tr>
-            <th><input id="usernameFld" class="form-control" placeholder="jdoe"/></th>
-            <th><input id="passwordFld" class="form-control" type="password"/></th>
-            <th><input id="firstNameFld" class="form-control" placeholder="John"/></th>
-            <th><input id="lastNameFld" class="form-control" placeholder="Doe"/></th>
-            <th><button id="createUser" class="btn btn-success">Create</button></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="template">
-            <td class="username">alice</td>
-            <td class="password">****</td>
-            <td class="firstName">Alice</td>
-            <td class="lastName">Wonderland</td>
-            <th><button class="edit btn btn-primary">Edit</button>
-                <button class="delete btn btn-danger">Delete</button>
-            </th>
-        </tr>
-        </tbody>
-        <tfoot></tfoot>
-    </table>
+    <h1 id="title">Profile</h1>
+    <form>
+        <div class="form-group row">
+            <label for="username" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-10">
+                <input type="text" readonly class="form-control-plaintext" id="username" value="username">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input
+                        type="password"
+                        class="form-control"
+                        id="inputPassword"
+                        placeholder="Password">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="firstName" class="col-sm-2 col-form-label">First Name</label>
+            <div class="col-sm-10">
+                <input
+                        class="form-control"
+                        id="firstName"
+                        placeholder="First Name">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="lastName" class="col-sm-2 col-form-label">Last Name</label>
+            <div class="col-sm-10">
+                <input
+                        class="form-control"
+                        id="lastName"
+                        placeholder="Last Name">
+            </div>
+        </div>
+        <button id="updateBtn" type="button" class="btn btn-primary btn-block">Update</button>
+    </form>
 </div>
 </body>
 </html>
