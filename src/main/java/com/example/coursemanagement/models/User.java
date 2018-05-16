@@ -11,13 +11,22 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
-  @Id
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-  private String username;
-  private String password;
-  private String firstName;
-  private String lastName;
+	private String username;
+	private String password;
+	private String firstName;
+	private String lastName;
+	private String role;
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public int getId() {
 		return id;
