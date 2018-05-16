@@ -10,7 +10,7 @@
 	function main() {
 		tbody = $("tbody");
 		template = $(".template");
-		$("#createUser").click(createUser);
+		$("#createBtn").click(createUser);
 		redrawUsers();
 	}
 
@@ -19,13 +19,10 @@
 		var password = $("#passwordFld").val();
 		var firstName = $("#firstNameFld").val();
 		var lastName = $("#lastNameFld").val();
+		var role = $("#roleFld").val();
 
-		var user = {
-			username: username,
-			password: password,
-			firstName: firstName,
-			lastName: lastName
-		};
+		var user = new User(username, password, "test@example.com",
+							firstName, lastName, "5555555555", role, "1997-05-15");
 
 		userService.createUser(user).then(redrawUsers);
 
@@ -44,9 +41,9 @@
 			var clone = template.clone();
 			clone.find(".delete").click(deleteUser);
 			clone.find(".edit").click(editUser);
-			clone.find(".username").html(user.username);
-			clone.find(".firstName").html(user.firstName);
-			clone.find(".lastName").html(user.lastName);
+			clone.find(".username").html(user.getUsername());
+			clone.find(".firstName").html(user.getFirstName());
+			clone.find(".lastName").html(user.getLastName());
 
 			clone
 				.attr("id", user.id)

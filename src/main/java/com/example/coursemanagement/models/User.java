@@ -16,9 +16,12 @@ public class User {
 	private int id;
 	private String username;
 	private String password;
+	private String email;
 	private String firstName;
 	private String lastName;
+
 	private String role;
+	private java.sql.Date dob;
 
 	public String getRole() {
 		return role;

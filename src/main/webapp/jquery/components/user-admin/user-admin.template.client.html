@@ -13,6 +13,7 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
 
+    <script src="../../models/user.model.client.js"></script>
     <script src="../../services/user.service.client.js"></script>
     <script src="user-admin.controller.client.js"></script>
 
@@ -30,7 +31,7 @@
             <th>Role</th>
             <th>&nbsp;</th>
         </tr>
-        <tr class="wbdv-form">
+        <tr>
             <td><input id="usernameFld" class="form-control"
                        placeholder="Username"/></td>
             <td><input id="passwordFld" class="form-control"
@@ -40,13 +41,13 @@
             <td><input id="lastNameFld" class="form-control"
                        placeholder="Last Name"/></td>
             <td><select id="roleFld" class="form-control" title="Role">
-                <option value="FACULTY">Faculty</option>
-                <option value="STUDENT">Student</option>
+                <option value="FACULTY">FACULTY</option>
+                <option value="STUDENT">STUDENT</option>
             </select></td>
             <td><span class="float-right" style="white-space: nowrap">
-                <i class="fa-2x fa fa-search wbdv-search"></i>
-                <i class="fa-2x fa fa-plus wbdv-create"></i>
-                <i class="fa-2x fa fa-check wbdv-update"></i>
+                <i class="fa-2x fa fa-search" id="searchBtn"></i>
+                <i class="fa-2x fa fa-plus" id="createBtn"></i>
+                <i class="fa-2x fa fa-check" id="updateBtn"></i>
             </span></td>
         </tr>
         </thead>
@@ -58,8 +59,8 @@
             <td class="lastName">Wonderland</td>
             <td class="role">Faculty</td>
             <td class="wbdv-actions"><span class="float-right">
-                <i id="deleteBtn" class="fa-2x fa fa-times"></i>
-                <i id="editBtn" class="fa-2x fa fa-pencil"></i>
+                <i id="delete" class="fa-2x fa fa-times"></i>
+                <i id="edit" class="fa-2x fa fa-pencil"></i>
             </span></td>
         </tr>
         </tbody>
