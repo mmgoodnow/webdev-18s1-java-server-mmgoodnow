@@ -25,7 +25,9 @@
 		$dob = $("#dob");
 		$updateBtn = $("#updateBtn");
 		$updateBtn.click(updateUser);
-		findUserById(2);
+
+		var params = (new URL(window.location.href)).searchParams;
+		findUserById(params.get("id"));
 
 	}
 

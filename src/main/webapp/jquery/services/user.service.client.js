@@ -5,6 +5,7 @@ function UserServiceClient() {
 	this.findUserById = findUserById;
 	this.updateUser = updateUser;
 	this.login = login;
+	this.register = register;
 	this.url = "/api/user";
 	this.loginUrl = "/api/login";
 	this.registerUrl = "/api/register";

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -29,15 +30,21 @@ public class UserService {
 	UserRepository repo;
 
 	@PostMapping("/api/login")
-	public List<User> login(@RequestBody User user) {
-		return (List<User>) repo.findUserByCredentials(user.getUsername(), user.getPassword());
+	public User login(@RequestBody User user) {
+		Iterator<User> iterator = repo.findUserByCredentials(user.getUsername(), user.getPassword
+			()).iterator();
+		if (iterator.hasNext()) {
+			return iterator.next();
+		} else throw new IllegalArgumentException();
+
 	}
 
 	@GetMapping("/api/user")
-	public User findUserByUsername(@RequestParam(value="username", required=true) String username) {
+	public List<User> findUserByUsername(@RequestParam(value="username", required=false) String username) {
+		if (username == null) return findAllUsers();
 		for (User u : repo.findAll()) {
 			if (u.getUsername().equals(username)) {
-				return u;
+				return Collections.singletonList(u);
 			}
 		}
 		return null;
@@ -55,8 +62,7 @@ public class UserService {
 		return repo.save(user);
 	}
 
-	@GetMapping("/api/user")
-	public List<User> findAllUsers() {
+	private List<User> findAllUsers() {
 		return (List<User>) repo.findAll();
 	}
 
