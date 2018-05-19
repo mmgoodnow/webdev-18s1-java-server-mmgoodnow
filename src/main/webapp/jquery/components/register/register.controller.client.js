@@ -14,15 +14,17 @@
 	}
 
 	function register() {
-		function createUser() {
-			var user = new User(
-				{
-					username: $username.val(),
-					password: $password.val()
-				});
-
-			userService.createUser(user);
-		}
+		var user = new User(
+			{
+				username: $username.val(),
+				password: $password.val()
+			});
+		userService.register(user)
+			.then(function () {
+				alert("Registered")
+			}, function () {
+				alert("Registration failed")
+			});
 	}
 
 })();
