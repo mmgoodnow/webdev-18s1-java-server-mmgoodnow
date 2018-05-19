@@ -20,15 +20,15 @@ function User(json) {
 	self.setDOB = setDOB;
 	self.getDOB = getDOB;
 
-	if (json.hasOwnProperty('id')) self.setID(json.id);
-	if (json.hasOwnProperty('username')) self.setUsername(json.username);
-	if (json.hasOwnProperty('password')) self.setPassword(json.password);
-	if (json.hasOwnProperty('email')) self.setEmail(json.email);
-	if (json.hasOwnProperty('firstName')) self.setFirstName(json.firstName);
-	if (json.hasOwnProperty('lastName')) self.setLastName(json.lastName);
-	if (json.hasOwnProperty('phone')) self.setPhone(json.phone);
-	if (json.hasOwnProperty('role')) self.setRole(json.role);
-	if (json.hasOwnProperty('dob')) self.setDOB(json.dob);
+	if (json.hasOwnProperty('id') && json.id) self.setID(json.id);
+	if (json.hasOwnProperty('username') && json.username) self.setUsername(json.username);
+	if (json.hasOwnProperty('password') && json.password) self.setPassword(json.password);
+	if (json.hasOwnProperty('email') && json.email) self.setEmail(json.email);
+	if (json.hasOwnProperty('firstName') && json.firstName) self.setFirstName(json.firstName);
+	if (json.hasOwnProperty('lastName') && json.lastName) self.setLastName(json.lastName);
+	if (json.hasOwnProperty('phone') && json.phone) self.setPhone(json.phone);
+	if (json.hasOwnProperty('role') && json.role) self.setRole(json.role);
+	if (json.hasOwnProperty('dob') && json.dob) self.setDOB(json.dob);
 
 	function setID(id) {
 		self.id = id;

@@ -10,6 +10,7 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
 
+    <script src="../../models/user.model.client.js"></script>
     <script src="../../services/user.service.client.js"></script>
     <script src="profile.controller.client.js"></script>
 
@@ -19,19 +20,31 @@
     <h1 id="title">Profile</h1>
     <form>
         <div class="form-group row">
-            <label for="username" class="col-sm-2 col-form-label">Username</label>
+            <label for="userid" class="col-sm-2 col-form-label">User ID</label>
             <div class="col-sm-10">
-                <input type="text" readonly class="form-control-plaintext" id="username" value="username">
+                <input type="text" readonly class="form-control-plaintext" id="userid" value="User ID">
             </div>
         </div>
         <div class="form-group row">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+            <label for="email" class="col-sm-2 col-form-label">Email Address</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="email" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="username" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="username" placeholder="Username">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="password" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
                 <input
                         type="password"
                         class="form-control"
-                        id="inputPassword"
-                        placeholder="Password">
+                        id="password"
+                        placeholder="****">
             </div>
         </div>
         <div class="form-group row">
@@ -50,6 +63,33 @@
                         class="form-control"
                         id="lastName"
                         placeholder="Last Name">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="phone" class="col-sm-2 col-form-label">Phone Number</label>
+            <div class="col-sm-10">
+                <input
+                        class="form-control"
+                        id="phone"
+                        placeholder="Phone Number">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="role" class="col-sm-2 col-form-label">Role</label>
+            <div class="col-sm-10">
+                <select id="role" class="form-control" title="Role">
+                    <option value="FACULTY">FACULTY</option>
+                    <option value="STUDENT">STUDENT</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="dob" class="col-sm-2 col-form-label">Date of Birth</label>
+            <div class="col-sm-10">
+                <input
+                        class="form-control"
+                        id="dob"
+                        placeholder="yyyy-mm-dd">
             </div>
         </div>
         <button id="updateBtn" type="button" class="btn btn-primary btn-block">Update</button>

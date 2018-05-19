@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
@@ -48,14 +49,18 @@ public class UserService {
 	@PutMapping("/api/user/{userId}")
 	public User updateUser(@PathVariable("userId") int uid, @RequestBody User newUser) {
 		Optional<User> optuser = repo.findById(uid);
-		return optuser.map(user -> {
-			user.setFirstName(newUser.getFirstName());
-			user.setLastName(newUser.getLastName());
-			repo.save(user);
-			return user;
-		}).orElse(null);
-
-
+		if (!optuser.isPresent()) throw new NoSuchElementException();
+		User user = optuser.get();
+		user.setFirstName(newUser.getFirstName());
+		user.setLastName(newUser.getLastName());
+		user.setPassword(newUser.getPassword());
+		user.setUsername(newUser.getUsername());
+		user.setEmail(newUser.getEmail());
+		user.setRole(newUser.getRole());
+		user.setPhone(newUser.getPhone());
+		user.setDob(newUser.getDob());
+		repo.save(user);
+		return user;
 	}
 
 	@DeleteMapping("/api/user/{userId}")
