@@ -1,5 +1,7 @@
 package com.example.coursemanagement.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Date;
 
 import javax.persistence.Entity;
@@ -17,6 +19,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String username;
+	@JsonIgnore
 	private String password;
 	private String email;
 	private String firstName;
