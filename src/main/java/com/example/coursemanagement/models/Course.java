@@ -19,14 +19,14 @@ import javax.persistence.TemporalType;
 @Entity
 public class Course {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String title;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date created;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modified;
-	@OneToMany(mappedBy="course",cascade = CascadeType.ALL,orphanRemoval=true)
+	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Module> modules;
 
 	public int getId() {
@@ -59,5 +59,13 @@ public class Course {
 
 	public void setModified(Date modified) {
 		this.modified = modified;
+	}
+
+	public List<Module> getModules() {
+		return modules;
+	}
+
+	public void setModules(List<Module> modules) {
+		this.modules = modules;
 	}
 }
