@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,6 +27,8 @@ public class Course {
 	private Date created;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modified;
+	@ManyToOne
+	private User owner;
 	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Module> modules;
 
@@ -67,5 +70,13 @@ public class Course {
 
 	public void setModules(List<Module> modules) {
 		this.modules = modules;
+	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 }

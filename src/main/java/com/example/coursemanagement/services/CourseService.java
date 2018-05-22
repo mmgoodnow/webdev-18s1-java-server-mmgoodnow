@@ -58,6 +58,7 @@ public class CourseService {
 			Course course = opt.get();
 			course.setModified(new Date());
 			course.setTitle(newCourse.getTitle());
+			course.setOwner(newCourse.getOwner());
 			return repo.save(course);
 		}
 		throw new NoSuchElementException();
