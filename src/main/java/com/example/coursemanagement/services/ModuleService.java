@@ -62,13 +62,7 @@ public class ModuleService {
 
 	@GetMapping("/api/course/{cid}/module")
 	public List<Module> findAllModulesForCourse(@PathVariable("cid") int cid) {
-		Optional<Course> data =
-			courseRepo.findById(cid);
-		if(data.isPresent()) {
-			Course course = data.get();
-			return course.getModules();
-		}
-		return null;
+		return courseRepo.findById(cid).map(Course::getModules).orElse(null);
 	}
 
 	@PutMapping("/api/module/{id}")
