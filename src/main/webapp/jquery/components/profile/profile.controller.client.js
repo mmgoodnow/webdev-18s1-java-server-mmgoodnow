@@ -11,6 +11,8 @@
 	var $role;
 	var $dob;
 	var $updateBtn;
+	var $logoutBtn;
+	var loginUrl = "/jquery/components/login/login.template.client.html"
 	$(main);
 
 	function main() {
@@ -24,10 +26,11 @@
 		$role = $("#role");
 		$dob = $("#dob");
 		$updateBtn = $("#updateBtn");
+		$logoutBtn = $("#logoutBtn");
 		$updateBtn.click(updateUser);
+		$logoutBtn.click(logout);
 
-		var params = (new URL(window.location.href)).searchParams;
-		findUserById(params.get("id"));
+		retrieveUserData();
 
 	}
 
@@ -50,25 +53,31 @@
 				alert("Success!");
 				return response;
 			}
-		}).then(function(user) {findUserById(user.id)});
+		}).then(retrieveUserData);
 	}
 
-	function findUserById(id) {
+	function logout() {
+		userService.logout();
+		window.location.assign(loginUrl);
+	}
+
+	function retrieveUserData() {
 		userService
-			.findUserById(id)
+			.profile()
 			.then(renderUser);
 	}
 
-	function renderUser(user) {
-		$userid.val(user.id);
-		$username.val(user.username);
-		$password.val(user.password);
-		$email.val(user.email);
-		$firstName.val(user.firstName);
-		$lastName.val(user.lastName);
-		$phone.val(user.phone);
-		$role.val(user.role);
-		$dob.val(user.dob);
+	function renderUser(json) {
+		var user = new User(json);
+		$userid.val(user.getID());
+		$username.val(user.getUsername());
+		$password.val(user.getPassword());
+		$email.val(user.getEmail());
+		$firstName.val(user.getFirstName());
+		$lastName.val(user.getLastName());
+		$phone.val(user.getPhone());
+		$role.val(user.getRole());
+		$dob.val(user.getDOB());
 	}
 
 })();

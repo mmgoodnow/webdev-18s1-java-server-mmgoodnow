@@ -4,6 +4,7 @@
 	var $username;
 	var $password;
 	var $register;
+	var profileUrl = "/jquery/components/profile/profile.template.client.html"
 	$(main);
 
 	function main() {
@@ -24,14 +25,10 @@
 				if (!response.ok) alert("Registration failed");
 				else {
 					alert("Registered");
-					response.json().then(function (json) {
-						window.location.assign(
-							"/jquery/components/profile/profile.template.client.html?id="
-							+ json.id);
+					response.json().then(function () {
+						window.location.assign(profileUrl)
 					});
 				}
-			}, function () {
-				alert("Registration failed");
 			});
 	}
 

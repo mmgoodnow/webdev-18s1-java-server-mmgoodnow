@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by Michael Goodnow on 5/10/18.
  */
@@ -30,13 +32,26 @@ public class UserService {
 	UserRepository repo;
 
 	@PostMapping("/api/login")
-	public User login(@RequestBody User user) {
-		Iterator<User> iterator = repo.findUserByCredentials(user.getUsername(), user.getPassword
-			()).iterator();
+	public User login(@RequestBody User creds, HttpSession session) {
+		Iterator<User> iterator = repo.findUserByCredentials(
+			creds.getUsername(), creds.getPassword()).iterator();
+
 		if (iterator.hasNext()) {
+			session.setAttribute("currentUser", creds);
 			return iterator.next();
 		} else throw new IllegalArgumentException();
 
+	}
+
+	@PostMapping("/api/logout")
+	public void logout(HttpSession session) {
+		session.invalidate();
+	}
+
+	@GetMapping("/api/profile")
+	public User profile(HttpSession session) {
+		User user = (User) session.getAttribute("currentUser");
+		return repo.findUserByUsername(user.getUsername()).iterator().next();
 	}
 
 	@GetMapping("/api/user")
@@ -51,9 +66,11 @@ public class UserService {
 	}
 
 	@PostMapping("/api/register")
-	public User register(@RequestBody User user) {
-		if (repo.findUserByUsername(user.getUsername()).iterator().hasNext())
+	public User register(@RequestBody User user, HttpSession session) {
+		if (repo.findUserByUsername(user.getUsername()).iterator().hasNext()) {
 			throw new IllegalArgumentException("Username taken");
+		}
+		session.setAttribute("currentUser", user);
 		return repo.save(user);
 	}
 

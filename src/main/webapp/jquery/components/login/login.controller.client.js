@@ -4,6 +4,7 @@
 	var $username;
 	var $password;
 	var $login;
+	var profileUrl = "/jquery/components/profile/profile.template.client.html";
 	$(main);
 
 	function main() {
@@ -18,10 +19,8 @@
 			.then(function (response) {
 				if (!response.ok) alert("Login failed");
 				else {
-					response.json().then(function (json) {
-						window.location.assign(
-							"/jquery/components/profile/profile.template.client.html?id="
-							+ json.id);
+					response.json().then(function () {
+						window.location.assign(profileUrl);
 					});
 				}
 			}, function () {

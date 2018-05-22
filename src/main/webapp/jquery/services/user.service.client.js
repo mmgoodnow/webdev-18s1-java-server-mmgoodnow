@@ -6,15 +6,20 @@ function UserServiceClient() {
 	this.updateUser = updateUser;
 	this.login = login;
 	this.register = register;
+	this.profile = profile;
+	this.logout = logout;
 	this.url = "/api/user";
 	this.loginUrl = "/api/login";
 	this.registerUrl = "/api/register";
+	this.profileUrl = "/api/profile";
+	this.logoutUrl = "/api/logout";
 	var self = this;
 
 	function login(username, password) {
 		return fetch(self.loginUrl, {
 			method: "post",
 			body: JSON.stringify({username: username, password: password}),
+			credentials: "same-origin",
 			headers: {
 				"content-type": "application/json"
 			}
@@ -40,6 +45,21 @@ function UserServiceClient() {
 			.then(function (response) {
 				return response.json();
 			});
+	}
+
+	function profile() {
+		return fetch(self.profileUrl, {
+			credentials: "same-origin"
+		}).then(function (response) {
+			return response.json();
+		});
+	}
+
+	function logout() {
+		return fetch(self.logoutUrl, {
+			method: "post",
+			credentials: "same-origin"
+		});
 	}
 
 	function deleteUser(userId) {
@@ -70,6 +90,7 @@ function UserServiceClient() {
 		return fetch(self.registerUrl, {
 			method: "post",
 			body: JSON.stringify(user),
+			credentials: "same-origin",
 			headers: {
 				"content-type": "application/json"
 			}
