@@ -66,12 +66,13 @@ public class ModuleService {
 	}
 
 	@PutMapping("/api/module/{id}")
-	public void updateModule(@PathVariable("id") int id,
+	public Module updateModule(@PathVariable("id") int id,
 	                         @RequestBody Module newModule) {
 		Optional<Module> opt = repo.findById(id);
 		if (opt.isPresent()) {
 			Module module = opt.get();
 			module.setTitle(newModule.getTitle());
+			return repo.save(module);
 		}
 		throw new NoSuchElementException();
 	}
