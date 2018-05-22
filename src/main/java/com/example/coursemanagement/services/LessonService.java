@@ -7,6 +7,7 @@ import com.example.coursemanagement.repositories.LessonRepository;
 import com.example.coursemanagement.repositories.ModuleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import java.util.Optional;
  */
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class LessonService {
 	@Autowired
 	LessonRepository repo;
