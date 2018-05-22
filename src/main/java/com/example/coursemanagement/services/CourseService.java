@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -29,35 +28,34 @@ public class CourseService {
 	CourseRepository repo;
 
 	@PostMapping("/api/course")
-	Course createCourse(@RequestBody Course course) {
+	public Course createCourse(@RequestBody Course course) {
 		course.setCreated(new Date());
 		course.setModified(new Date());
 		return repo.save(course);
 	}
 
-	@DeleteMapping("/api/course/{id}")
-	void deleteCourse(@PathVariable("id") int id) {
+	@DeleteMapping("/api/course/{cid}")
+	public void deleteCourse(@PathVariable("cid") int id) {
 		repo.deleteById(id);
 	}
 
 	@GetMapping("/api/course")
-	List<Course> findAllCourses() {
+	public List<Course> findAllCourses() {
 		return (List<Course>) repo.findAll();
 	}
 
-	@GetMapping("/api/course/{id}")
-	Course findCourseById(@PathVariable("id") int id) {
+	@GetMapping("/api/course/{cid}")
+	public Course findCourseById(@PathVariable("cid") int id) {
 		return repo.findById(id).orElse(null);
 	}
 
 	@PutMapping("/api/course")
-	Course updateCourse(@RequestBody Course newCourse) {
+	public Course updateCourse(@RequestBody Course newCourse) {
 		Optional<Course> opt = repo.findById(newCourse.getId());
 		if (opt.isPresent()) {
 			Course course = opt.get();
 			course.setModified(new Date());
 			course.setTitle(newCourse.getTitle());
-			course.setModules(newCourse.getModules());
 			return repo.save(course);
 		}
 		throw new NoSuchElementException();
