@@ -2,6 +2,8 @@ package com.example.coursemanagement.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +23,8 @@ public class Lesson {
 	@ManyToOne
 	@JsonIgnore
 	private Module module;
+
+	private List<String> topics;
 
 	public int getId() {
 		return id;
@@ -45,4 +49,13 @@ public class Lesson {
 	public void setModule(Module module) {
 		this.module = module;
 	}
+
+	public List<String> getTopics() {
+		return topics;
+	}
+
+	public void setTopics(List<String> topics) {
+		this.topics = topics;
+	}
+
 }
