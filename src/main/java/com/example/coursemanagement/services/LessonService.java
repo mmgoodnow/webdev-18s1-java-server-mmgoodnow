@@ -65,6 +65,12 @@ public class LessonService {
 		return moduleRepository.findById(mid).map(Module::getLessons).orElse(null);
 	}
 
+	@GetMapping("/api/lesson/{id}")
+	public Lesson findLessonById(@PathVariable("id") int id) {
+		Optional<Lesson> opt = repo.findById(id);
+		return opt.orElse(null);
+	}
+
 	@PutMapping("/api/lesson/{id}")
 	public Lesson updateLesson(@PathVariable("id") int id,
 	                           @RequestBody Lesson newLesson) {
