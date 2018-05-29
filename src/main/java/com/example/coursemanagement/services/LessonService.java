@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
@@ -63,5 +65,15 @@ public class LessonService {
 		return moduleRepository.findById(mid).map(Module::getLessons).orElse(null);
 	}
 
-
+	@PutMapping("/api/lesson/{id}")
+	public Lesson updateLesson(@PathVariable("id") int id,
+	                           @RequestBody Lesson newLesson) {
+		Optional<Lesson> opt = repo.findById(id);
+		if (opt.isPresent()) {
+			Lesson lesson = opt.get();
+			lesson.setTitle(newLesson.getTitle());
+			return repo.save(lesson);
+		}
+		throw new NoSuchElementException();
+	}
 }
