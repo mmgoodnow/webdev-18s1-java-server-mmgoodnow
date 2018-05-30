@@ -1,7 +1,7 @@
-package com.example.coursemanagement.services;
+package webdev.services;
 
-import com.example.coursemanagement.models.Course;
-import com.example.coursemanagement.repositories.CourseRepository;
+import webdev.models.Course;
+import webdev.repositories.CourseRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

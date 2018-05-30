@@ -1,4 +1,4 @@
-package com.example.coursemanagement.models;
+package webdev.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

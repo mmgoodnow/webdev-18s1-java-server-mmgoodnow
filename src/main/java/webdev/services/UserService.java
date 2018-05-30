@@ -1,7 +1,7 @@
-package com.example.coursemanagement.services;
+package webdev.services;
 
-import com.example.coursemanagement.models.User;
-import com.example.coursemanagement.repositories.UserRepository;
+import webdev.models.User;
+import webdev.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

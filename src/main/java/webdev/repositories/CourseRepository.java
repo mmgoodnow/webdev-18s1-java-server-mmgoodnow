@@ -1,6 +1,6 @@
-package com.example.coursemanagement.repositories;
+package webdev.repositories;
 
-import com.example.coursemanagement.models.Course;
+import webdev.models.Course;
 
 import org.springframework.data.repository.CrudRepository;
 
