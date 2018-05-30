@@ -5,6 +5,7 @@ package webdev.models;
  */
 
 public abstract class Widget {
+	int id;
 	String name;
 	int order;
 	String text;
