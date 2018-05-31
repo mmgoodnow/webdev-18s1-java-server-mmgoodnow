@@ -1,8 +1,8 @@
 package webdev.repositories;
 
-import webdev.models.Course;
-
 import org.springframework.data.repository.CrudRepository;
+
+import webdev.models.Course;
 
 /**
  * Created by Michael Goodnow on 5/21/18.

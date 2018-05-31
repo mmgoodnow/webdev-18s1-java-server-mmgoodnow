@@ -1,10 +1,10 @@
 package webdev.repositories;
 
-import webdev.models.User;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+
+import webdev.models.User;
 
 /**
  * Created by Michael Goodnow on 5/10/18.

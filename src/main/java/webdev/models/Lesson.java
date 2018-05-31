@@ -59,4 +59,6 @@ public class Lesson {
 	public void setWidgets(List<Widget> widgets) {
 		this.widgets = widgets;
 	}
+
+
 }

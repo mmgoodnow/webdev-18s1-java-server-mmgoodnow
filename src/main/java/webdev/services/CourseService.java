@@ -1,8 +1,5 @@
 package webdev.services;
 
-import webdev.models.Course;
-import webdev.repositories.CourseRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +14,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
+import webdev.models.Course;
+import webdev.repositories.CourseRepository;
 
 /**
  * Created by Michael Goodnow on 5/21/18.

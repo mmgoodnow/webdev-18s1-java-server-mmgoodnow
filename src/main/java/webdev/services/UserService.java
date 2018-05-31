@@ -1,8 +1,5 @@
 package webdev.services;
 
-import webdev.models.User;
-import webdev.repositories.UserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +17,9 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
+
+import webdev.models.User;
+import webdev.repositories.UserRepository;
 
 /**
  * Created by Michael Goodnow on 5/10/18.

@@ -1,11 +1,5 @@
 package webdev.services;
 
-import webdev.models.Lesson;
-import webdev.models.Module;
-import webdev.repositories.CourseRepository;
-import webdev.repositories.LessonRepository;
-import webdev.repositories.ModuleRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +14,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import webdev.models.Lesson;
+import webdev.models.Module;
+import webdev.repositories.CourseRepository;
+import webdev.repositories.LessonRepository;
+import webdev.repositories.ModuleRepository;
+
 /**
  * Created by Michael Goodnow on 5/21/18.
  */
@@ -31,16 +31,16 @@ public class LessonService {
 	LessonRepository repo;
 
 	@Autowired
-	ModuleRepository moduleRepository;
+	ModuleRepository moduleRepo;
 
 	@Autowired
-	CourseRepository courseRepository;
+	CourseRepository courseRepo;
 
 	@PostMapping("/api/course/{cid}/module/{mid}/lesson")
 	public Lesson createLesson(@PathVariable("cid") int cid,
 	                           @PathVariable("mid") int mid,
 	                           @RequestBody Lesson lesson) {
-		Optional<Module> opt = moduleRepository.findById(mid);
+		Optional<Module> opt = moduleRepo.findById(mid);
 		if (opt.isPresent()) {
 			Module mod = opt.get();
 			lesson.setModule(mod);
@@ -62,7 +62,7 @@ public class LessonService {
 	@GetMapping("/api/course/{cid}/module/{mid}/lesson")
 	public List<Lesson> findAllLessonsForModule(@PathVariable("cid") int cid,
 	                                            @PathVariable("mid") int mid) {
-		return moduleRepository.findById(mid).map(Module::getLessons).orElse(null);
+		return moduleRepo.findById(mid).map(Module::getLessons).orElse(null);
 	}
 
 	@GetMapping("/api/lesson/{id}")

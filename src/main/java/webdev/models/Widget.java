@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
  */
 
 @Entity
-public abstract class Widget {
+public class Widget {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
