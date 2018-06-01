@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +26,7 @@ public class Lesson {
 	@JsonIgnore
 	private Module module;
 
-	@OneToMany
+	@OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Widget> widgets;
 
 	public int getId() {

@@ -5,6 +5,6 @@ package webdev.models;
  */
 
 public enum ListType {
-	ordered,
-	unordered
+	ORDERED,
+	UNORDERED
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import webdev.models.Lesson;
 import webdev.models.Widget;
@@ -45,7 +46,9 @@ public class WidgetService {
 
 	@GetMapping("/api/lesson/{lessonId}/widget")
 	public List<Widget> findAllWidgetsForLesson(@PathVariable("lessonId") int lid) {
-		return lessonRepo.findById(lid).map(Lesson::getWidgets).orElse(null);
+		Optional<Lesson> opt = lessonRepo.findById(lid);
+		List<Widget> ret = opt.map(Lesson::getWidgets).orElse(null);
+		return ret;
 	}
 
 	@PostMapping("/api/lesson/{lessonId}/widget")
@@ -64,13 +67,22 @@ public class WidgetService {
 	                                    @RequestBody List<Widget> widgets) {
 		Lesson lesson = lessonRepo.findById(lid).orElseThrow(NoSuchElementException::new);
 
-		this.findAllWidgetsForLesson(lid)
+		List<Widget> oldies = this.findAllWidgetsForLesson(lid);
+		List<Widget> c = oldies
 			.stream()
-			.filter(ow -> widgets.stream() // cull to just dead widgets
-				.noneMatch(nw -> ow.getId() == nw.getId())) // check if it matches any alive
-			// widgets
-			.map(Widget::getId) // get ids for dead widgets
-			.forEach(this::deleteWidget); // delete all old ones by id
+			.filter(ow -> widgets.stream()
+				.noneMatch(nw -> ow.getId() == nw.getId())).collect(Collectors.toList());
+			List<Integer> ids = c.stream()
+			.map(Widget::getId).collect(Collectors.toList());
+
+			for (int id : ids) {
+				try {
+					repo.deleteById(id);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			List<Widget> currentBackEnd = (List<Widget>) repo.findAll();
 
 		for (Widget newWidget : widgets) {
 			try {
