@@ -15,8 +15,6 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityManager;
-
 import webdev.models.Lesson;
 import webdev.models.Widget;
 import webdev.repositories.LessonRepository;
