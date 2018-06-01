@@ -57,8 +57,32 @@ public class WidgetService {
 		return null;
 	}
 
+	@PostMapping("/api/lesson/{lessonId}/widget/save")
+	public boolean saveWidgetsForLesson(@PathVariable("lessonId") int lid,
+	                                    @RequestBody List<Widget> widgets) {
+		Lesson lesson = lessonRepo.findById(lid).orElseThrow(NoSuchElementException::new);
+
+		this.findAllWidgetsForLesson(lid)
+			.stream()
+			.filter(ow -> widgets.stream() // cull to just dead widgets
+				.noneMatch(nw -> ow.getId() == nw.getId())) // check if it matches any alive
+			// widgets
+			.map(Widget::getId) // get ids for dead widgets
+			.forEach(this::deleteWidget); // delete all old ones by id
+
+		for (Widget newWidget : widgets) {
+			try {
+				this.updateWidget(newWidget.getId(), newWidget);
+			} catch (NoSuchElementException e) {
+				this.createWidget(lid, newWidget);
+			}
+		}
+		return true;
+	}
+
 	@PutMapping("/api/widget/{widgetId}")
-	public Widget updateWidget(@PathVariable("widgetId") int id, @RequestBody Widget newWidget) {
+	public Widget updateWidget(@PathVariable("widgetId") int id, @RequestBody Widget newWidget)
+		throws NoSuchElementException {
 		Optional<Widget> opt = repo.findById(id);
 		if (opt.isPresent()) {
 			Widget widget = opt.get();
