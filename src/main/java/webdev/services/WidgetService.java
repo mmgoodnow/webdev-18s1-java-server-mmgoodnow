@@ -15,6 +15,8 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+
 import webdev.models.Lesson;
 import webdev.models.Widget;
 import webdev.repositories.LessonRepository;
@@ -72,15 +74,12 @@ public class WidgetService {
 			.stream()
 			.filter(ow -> widgets.stream()
 				.noneMatch(nw -> ow.getId() == nw.getId())).collect(Collectors.toList());
-			List<Integer> ids = c.stream()
+		List<Integer> ids = c.stream()
 			.map(Widget::getId).collect(Collectors.toList());
 
 			for (int id : ids) {
-				try {
+				Optional<Widget> w = repo.findById(id);
 					repo.deleteById(id);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			}
 			List<Widget> currentBackEnd = (List<Widget>) repo.findAll();
 
