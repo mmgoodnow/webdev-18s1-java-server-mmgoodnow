@@ -65,7 +65,7 @@ public class WidgetService {
 	public void saveWidgetsForLesson(@PathVariable("lessonId") int lid,
 	                                    @RequestBody List<Widget> widgets) {
 		Lesson lesson = lessonRepo.findById(lid).orElseThrow(NoSuchElementException::new);
-		lesson.getWidgets().retainAll(widgets);
+		lesson.getWidgets().clear();
 		widgets.forEach(w -> w.setLesson(lesson));
 		lessonRepo.save(lesson);
 	}
