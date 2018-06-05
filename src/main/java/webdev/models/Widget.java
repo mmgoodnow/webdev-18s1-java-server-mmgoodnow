@@ -111,8 +111,8 @@ public class Widget {
 	}
 
 	public void setLesson(Lesson newLesson) {
-		if (newLesson == this.lesson) return;
 		if (this.lesson != null) {
+			if (this.lesson.equals(newLesson)) return;
 			this.lesson.removeWidget(this);
 		}
 		this.lesson = newLesson;
@@ -179,6 +179,6 @@ public class Widget {
 
 	@Override
 	public int hashCode() {
-		return Integer.hashCode(id);
+		return Objects.hash(id);
 	}
 }

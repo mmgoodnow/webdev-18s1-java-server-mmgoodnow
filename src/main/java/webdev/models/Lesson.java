@@ -2,6 +2,7 @@ package webdev.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -71,5 +72,16 @@ public class Lesson {
 		w.setLesson(null);
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Lesson lesson = (Lesson) o;
+		return id == lesson.id;
+	}
 }
