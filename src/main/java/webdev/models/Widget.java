@@ -2,6 +2,8 @@ package webdev.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -108,8 +110,15 @@ public class Widget {
 		return lesson;
 	}
 
-	public void setLesson(Lesson lesson) {
-		this.lesson = lesson;
+	public void setLesson(Lesson newLesson) {
+		if (newLesson == this.lesson) return;
+		if (this.lesson != null) {
+			this.lesson.removeWidget(this);
+		}
+		this.lesson = newLesson;
+		if (newLesson != null) {
+			newLesson.addWidget(this);
+		}
 	}
 
 	public WidgetType getWidgetType() {
@@ -158,5 +167,18 @@ public class Widget {
 
 	public void setSrc(String src) {
 		this.src = src;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Widget)) return false;
+		Widget widget = (Widget) o;
+		return id == widget.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Integer.hashCode(id);
 	}
 }

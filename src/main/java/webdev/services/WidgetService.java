@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import webdev.models.Lesson;
 import webdev.models.Widget;
@@ -45,10 +45,9 @@ public class WidgetService {
 	}
 
 	@GetMapping("/api/lesson/{lessonId}/widget")
-	public List<Widget> findAllWidgetsForLesson(@PathVariable("lessonId") int lid) {
+	public Set<Widget> findAllWidgetsForLesson(@PathVariable("lessonId") int lid) {
 		Optional<Lesson> opt = lessonRepo.findById(lid);
-		List<Widget> ret = opt.map(Lesson::getWidgets).orElse(null);
-		return ret;
+		return opt.map(Lesson::getWidgets).orElse(null);
 	}
 
 	@PostMapping("/api/lesson/{lessonId}/widget")
@@ -63,32 +62,12 @@ public class WidgetService {
 	}
 
 	@PostMapping("/api/lesson/{lessonId}/widget/save")
-	public boolean saveWidgetsForLesson(@PathVariable("lessonId") int lid,
+	public void saveWidgetsForLesson(@PathVariable("lessonId") int lid,
 	                                    @RequestBody List<Widget> widgets) {
 		Lesson lesson = lessonRepo.findById(lid).orElseThrow(NoSuchElementException::new);
-
-		List<Widget> oldies = this.findAllWidgetsForLesson(lid);
-		List<Widget> c = oldies
-			.stream()
-			.filter(ow -> widgets.stream()
-				.noneMatch(nw -> ow.getId() == nw.getId())).collect(Collectors.toList());
-		List<Integer> ids = c.stream()
-			.map(Widget::getId).collect(Collectors.toList());
-
-			for (int id : ids) {
-				Optional<Widget> w = repo.findById(id);
-					repo.deleteById(id);
-			}
-			List<Widget> currentBackEnd = (List<Widget>) repo.findAll();
-
-		for (Widget newWidget : widgets) {
-			try {
-				this.updateWidget(newWidget.getId(), newWidget);
-			} catch (NoSuchElementException e) {
-				this.createWidget(lid, newWidget);
-			}
-		}
-		return true;
+		lesson.getWidgets().retainAll(widgets);
+		widgets.forEach(w -> w.setLesson(lesson));
+		lessonRepo.save(lesson);
 	}
 
 	@PutMapping("/api/widget/{widgetId}")

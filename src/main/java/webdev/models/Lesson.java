@@ -2,7 +2,7 @@ package webdev.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -27,7 +27,7 @@ public class Lesson {
 	private Module module;
 
 	@OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Widget> widgets;
+	private Set<Widget> widgets;
 
 	public int getId() {
 		return id;
@@ -53,12 +53,22 @@ public class Lesson {
 		this.module = module;
 	}
 
-	public List<Widget> getWidgets() {
+	public Set<Widget> getWidgets() {
 		return widgets;
 	}
 
-	public void setWidgets(List<Widget> widgets) {
+	public void setWidgets(Set<Widget> widgets) {
 		this.widgets = widgets;
+	}
+
+	public void addWidget(Widget w) {
+		this.widgets.add(w);
+		w.setLesson(this);
+	}
+
+	public void removeWidget(Widget w) {
+		this.widgets.remove(w);
+		w.setLesson(null);
 	}
 
 
