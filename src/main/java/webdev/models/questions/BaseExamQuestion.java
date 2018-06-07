@@ -2,6 +2,8 @@ package webdev.models.questions;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +19,7 @@ import webdev.models.widgets.Exam;
 @Table(name = "JOINED_BASE_QUESTION")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class BaseExamQuestion {
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -51,5 +54,33 @@ public class BaseExamQuestion {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Exam getExam() {
+		return exam;
+	}
+
+	public void setExam(Exam newExam) {
+		if (this.exam != null) {
+			if (this.exam.equals(newExam)) return;
+			this.exam.removeQuestion(this);
+		}
+		this.exam = newExam;
+		if (newExam != null) {
+			newExam.addQuestion(this);
+		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof BaseExamQuestion)) return false;
+		BaseExamQuestion that = (BaseExamQuestion) o;
+		return id == that.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
 	}
 }

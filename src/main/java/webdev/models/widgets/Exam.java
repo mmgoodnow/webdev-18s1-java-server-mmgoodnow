@@ -41,4 +41,15 @@ public class Exam extends Widget {
 	public void setQuestions(List<BaseExamQuestion> questions) {
 		this.questions = questions;
 	}
+
+	public void addQuestion(BaseExamQuestion q) {
+		this.questions.add(q);
+		q.setExam(this);
+	}
+
+	public void removeQuestion(BaseExamQuestion q) {
+		this.questions.remove(q);
+		q.setExam(null);
+	}
+
 }

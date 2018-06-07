@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "JOINED_FILL_IN_THE_BLANK_QUESTION")
-public class FillInTheBlankExamQuestion extends BaseExamQuestion {
+public class FillInTheBlanksExamQuestion extends BaseExamQuestion {
 	@Column(name = "BLANKS", nullable = false)
 	private String blanks;
 	public String getBlanks() {
