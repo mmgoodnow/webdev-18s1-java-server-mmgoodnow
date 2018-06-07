@@ -26,7 +26,9 @@ public class FillInTheBlanksQuestionService {
 
 	@PostMapping("/api/exam/{eid}/blanks")
 	public FillInTheBlanksExamQuestion createBlanksQuestion(@PathVariable("eid") int eid,
-	                                                        @RequestBody FillInTheBlanksExamQuestion question) {
+	                                                        @RequestBody
+		                                                        FillInTheBlanksExamQuestion
+		                                                        question) {
 		Optional<Exam> opt = examRepo.findById(eid);
 		if (opt.isPresent()) {
 			Exam exam = opt.get();
@@ -38,7 +40,9 @@ public class FillInTheBlanksQuestionService {
 
 	@PutMapping("/api/blanks/{id}")
 	public FillInTheBlanksExamQuestion updateBlanksQuestion(@PathVariable("id") int id,
-	                                                        @RequestBody FillInTheBlanksExamQuestion newQuestion) {
+	                                                        @RequestBody
+		                                                        FillInTheBlanksExamQuestion
+		                                                        newQuestion) {
 		Optional<FillInTheBlanksExamQuestion> opt = repo.findById(id);
 		if (opt.isPresent()) {
 			FillInTheBlanksExamQuestion oldQuestion = opt.get();

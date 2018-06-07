@@ -1,14 +1,7 @@
 package webdev.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -36,7 +29,7 @@ public class ModuleService {
 		@PathVariable("courseId") int courseId,
 		@RequestBody Module newModule) {
 		Optional<Course> opt = courseRepo.findById(courseId);
-		if(opt.isPresent()) {
+		if (opt.isPresent()) {
 			Course course = opt.get();
 			newModule.setCourse(course);
 			return repo.save(newModule);
@@ -66,7 +59,7 @@ public class ModuleService {
 
 	@PutMapping("/api/module/{id}")
 	public Module updateModule(@PathVariable("id") int id,
-	                         @RequestBody Module newModule) {
+	                           @RequestBody Module newModule) {
 		Optional<Module> opt = repo.findById(id);
 		if (opt.isPresent()) {
 			Module module = opt.get();
@@ -75,8 +68,6 @@ public class ModuleService {
 		}
 		throw new NoSuchElementException();
 	}
-
-
 
 
 }

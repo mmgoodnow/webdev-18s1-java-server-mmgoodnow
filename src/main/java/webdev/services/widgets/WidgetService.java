@@ -1,14 +1,7 @@
 package webdev.services.widgets;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -63,7 +56,7 @@ public class WidgetService {
 
 	@PostMapping("/api/lesson/{lessonId}/widget/save")
 	public void saveWidgetsForLesson(@PathVariable("lessonId") int lid,
-	                                    @RequestBody List<? extends Widget> widgets) {
+	                                 @RequestBody List<? extends Widget> widgets) {
 		Lesson lesson = lessonRepo.findById(lid).orElseThrow(NoSuchElementException::new);
 		lesson.getWidgets().clear();
 		widgets.forEach(w -> w.setLesson(lesson));

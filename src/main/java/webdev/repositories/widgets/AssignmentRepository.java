@@ -11,7 +11,7 @@ import webdev.models.widgets.Assignment;
  */
 
 public interface AssignmentRepository extends CrudRepository<Assignment, Integer> {
-	@Query("SELECT a FROM Assignment a WHERE a.lesson_id=:lid")
+	@Query("SELECT a FROM Assignment a WHERE a.lesson.id=:lid")
 	Iterable<Assignment> findAllByLessonId(@Param("lid") int lessonId);
 
 }

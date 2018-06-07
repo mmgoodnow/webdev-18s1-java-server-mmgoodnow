@@ -17,11 +17,11 @@ import webdev.models.widgets.Exam;
 
 @Entity
 @Table(name = "JOINED_BASE_QUESTION")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class BaseExamQuestion {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int points;
 	private String title;
@@ -34,24 +34,31 @@ public class BaseExamQuestion {
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public int getPoints() {
 		return points;
 	}
+
 	public void setPoints(int points) {
 		this.points = points;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -72,15 +79,15 @@ public class BaseExamQuestion {
 	}
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (!(o instanceof BaseExamQuestion)) return false;
 		BaseExamQuestion that = (BaseExamQuestion) o;
 		return id == that.id;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
 	}
 }

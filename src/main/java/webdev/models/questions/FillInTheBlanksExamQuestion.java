@@ -9,9 +9,11 @@ import javax.persistence.Table;
 public class FillInTheBlanksExamQuestion extends BaseExamQuestion {
 	@Column(name = "BLANKS", nullable = false)
 	private String blanks;
+
 	public String getBlanks() {
 		return blanks;
 	}
+
 	public void setBlanks(String blanks) {
 		this.blanks = blanks;
 	}

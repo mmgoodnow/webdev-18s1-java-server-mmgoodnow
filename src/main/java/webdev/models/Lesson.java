@@ -22,7 +22,7 @@ import webdev.models.widgets.Widget;
 @Entity
 public class Lesson {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String title;
 	@ManyToOne

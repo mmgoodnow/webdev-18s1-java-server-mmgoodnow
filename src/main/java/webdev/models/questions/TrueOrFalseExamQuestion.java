@@ -14,6 +14,7 @@ public class TrueOrFalseExamQuestion extends BaseExamQuestion {
 	public Boolean getCorrectAnswer() {
 		return correctAnswer;
 	}
+
 	public void setCorrectAnswer(Boolean correctAnswer) {
 		this.correctAnswer = correctAnswer;
 	}
