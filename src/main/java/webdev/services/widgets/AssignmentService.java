@@ -2,15 +2,14 @@ package webdev.services.widgets;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-
 import webdev.models.Lesson;
 import webdev.models.widgets.Assignment;
 import webdev.repositories.LessonRepository;
 import webdev.repositories.widgets.AssignmentRepository;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 /**
  * Created by Michael Goodnow on 6/6/18.
@@ -49,7 +48,7 @@ public class AssignmentService {
 
 		if (opt.isPresent()) {
 			assignment.setLesson(opt.get());
-			repo.save(assignment);
+			return repo.save(assignment);
 		}
 
 		throw new NoSuchElementException();

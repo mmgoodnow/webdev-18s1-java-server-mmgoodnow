@@ -1,19 +1,10 @@
 package webdev.models.widgets;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.util.Objects;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import webdev.models.Lesson;
+
+import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Created by Michael Goodnow on 5/30/18.
@@ -26,9 +17,11 @@ public abstract class Widget {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String text;
+
+	private String title;
 
 	private WidgetType widgetType;
+
 	@ManyToOne
 	@JsonIgnore
 	private Lesson lesson;
@@ -39,14 +32,6 @@ public abstract class Widget {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
 	}
 
 	public Lesson getLesson() {
@@ -83,5 +68,13 @@ public abstract class Widget {
 
 	public void setWidgetType(WidgetType widgetType) {
 		this.widgetType = widgetType;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 }

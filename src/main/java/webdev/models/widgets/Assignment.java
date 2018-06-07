@@ -9,9 +9,12 @@ import javax.persistence.Entity;
 @Entity
 public class Assignment extends Widget {
 	private int points;
-	private String title;
 	private String description;
 
+	public Assignment() {
+		super();
+		this.setWidgetType(WidgetType.ASSIGNMENT);
+	}
 
 	public int getPoints() {
 		return points;
@@ -19,14 +22,6 @@ public class Assignment extends Widget {
 
 	public void setPoints(int points) {
 		this.points = points;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getDescription() {

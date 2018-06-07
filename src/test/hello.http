@@ -27,14 +27,27 @@ Content-Type: application/json
 
 ###
 
-POST http://sage.local:8080/api/lesson/
+POST http://sage.local:8080/api/lesson/622/assignment
+Content-Type: application/json
+
+{
+    "title": "Assignment 1",
+    "points": 20,
+    "description": "This is the description"
+}
+
+###
+
+DELETE http://sage.local:8080/api/widget/12
+
+###
+
+POST http://sage.local:8080/api/lesson/622/exam
 Content-Type: application/json
 
 {
     "title": "Exam 1",
-    "owner": {
-        "id":92
-    }
+    "questions": []
 }
 
 ###

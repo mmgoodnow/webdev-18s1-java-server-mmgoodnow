@@ -2,15 +2,14 @@ package webdev.services.widgets;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-
 import webdev.models.Lesson;
 import webdev.models.widgets.Exam;
 import webdev.repositories.LessonRepository;
 import webdev.repositories.widgets.ExamRepository;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 /**
  * Created by Michael Goodnow on 6/6/18.
@@ -48,7 +47,7 @@ public class ExamService {
 
 		if (opt.isPresent()) {
 			exam.setLesson(opt.get());
-			repo.save(exam);
+			return repo.save(exam);
 		}
 
 		throw new NoSuchElementException();
