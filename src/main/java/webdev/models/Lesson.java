@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import webdev.models.widgets.Widget;
+
 /**
  * Created by Michael Goodnow on 5/21/18.
  */
