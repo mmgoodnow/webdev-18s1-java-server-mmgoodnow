@@ -1,4 +1,4 @@
-package webdev.services;
+package webdev.services.widgets;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,9 +16,9 @@ import java.util.Optional;
 import java.util.Set;
 
 import webdev.models.Lesson;
-import webdev.models.Widget;
+import webdev.models.widgets.Widget;
 import webdev.repositories.LessonRepository;
-import webdev.repositories.WidgetRepository;
+import webdev.repositories.widgets.WidgetRepository;
 
 /**
  * Created by Michael Goodnow on 5/30/18.
@@ -63,7 +63,7 @@ public class WidgetService {
 
 	@PostMapping("/api/lesson/{lessonId}/widget/save")
 	public void saveWidgetsForLesson(@PathVariable("lessonId") int lid,
-	                                    @RequestBody List<Widget> widgets) {
+	                                    @RequestBody List<? extends Widget> widgets) {
 		Lesson lesson = lessonRepo.findById(lid).orElseThrow(NoSuchElementException::new);
 		lesson.getWidgets().clear();
 		widgets.forEach(w -> w.setLesson(lesson));
@@ -75,21 +75,8 @@ public class WidgetService {
 		throws NoSuchElementException {
 		Optional<Widget> opt = repo.findById(id);
 		if (opt.isPresent()) {
-			Widget widget = opt.get();
-			widget.setClassName(newWidget.getClassName());
-			widget.setHeight(newWidget.getHeight());
-			widget.setHref(newWidget.getHref());
-			widget.setListItems(newWidget.getListItems());
-			widget.setListType(newWidget.getListType());
-			widget.setName(newWidget.getName());
-			widget.setPosition(newWidget.getPosition());
-			widget.setSize(newWidget.getSize());
-			widget.setSrc(newWidget.getSrc());
-			widget.setStyle(newWidget.getStyle());
-			widget.setText(newWidget.getText());
-			widget.setWidgetType(newWidget.getWidgetType());
-			widget.setWidth(newWidget.getWidth());
-			return repo.save(widget);
+			newWidget.setId(id);
+			return repo.save(newWidget);
 		}
 		throw new NoSuchElementException();
 	}
