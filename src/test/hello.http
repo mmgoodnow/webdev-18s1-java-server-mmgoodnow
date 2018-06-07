@@ -1,0 +1,40 @@
+GET https://webdev-18s1-mmgoodnow.herokuapp.com/api/course
+
+###
+
+POST https://webdev-18s1-mmgoodnow.herokuapp.com/api/course
+Content-Type: application/json
+
+{
+    "title": "MATH2345",
+    "owner": {
+        "id":92
+    }
+}
+
+###
+
+PUT https://webdev-18s1-mmgoodnow.herokuapp.com/api/course
+Content-Type: application/json
+
+{
+    "id": 42,
+    "title": "New Course",
+    "owner": {
+        "id": 92
+    }
+}
+
+###
+
+POST http://sage.local:8080/api/lesson/
+Content-Type: application/json
+
+{
+    "title": "Exam 1",
+    "owner": {
+        "id":92
+    }
+}
+
+###
