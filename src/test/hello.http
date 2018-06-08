@@ -31,9 +31,9 @@ POST http://sage.local:8080/api/lesson/622/assignment
 Content-Type: application/json
 
 {
-    "title": "Assignment 1",
+    "title": "Assignment 2",
     "points": 20,
-    "description": "This is the description"
+    "description": "This is the other one"
 }
 
 ###
@@ -46,8 +46,12 @@ POST http://sage.local:8080/api/lesson/622/exam
 Content-Type: application/json
 
 {
-    "title": "Exam 1",
+    "title": "Exam 2",
     "questions": []
 }
+
+###
+
+GET http://sage.local:8080/api/lesson/622/widget
 
 ###

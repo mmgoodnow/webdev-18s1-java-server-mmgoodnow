@@ -53,6 +53,17 @@ public class ExamService {
 		throw new NoSuchElementException();
 	}
 
+	@PutMapping("/api/exam/{aid}")
+	public Exam updateExam(@PathVariable("aid") int id,
+						   @RequestBody Exam exam) {
+		Optional<Exam> opt = repo.findById(id);
+		if (opt.isPresent()) {
+			exam.setId(id);
+			return repo.save(exam);
+		}
+		throw new NoSuchElementException();
+	}
+
 	@DeleteMapping("/api/exam/{examId}")
 	public void deleteExamById(@PathVariable("examId") int id) {
 		repo.deleteById(id);

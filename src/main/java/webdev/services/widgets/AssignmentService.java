@@ -54,6 +54,17 @@ public class AssignmentService {
 		throw new NoSuchElementException();
 	}
 
+	@PutMapping("/api/assignment/{aid}")
+	public Assignment updateAssignment(@PathVariable("aid") int id,
+									   @RequestBody Assignment assignment) {
+		Optional<Assignment> opt = repo.findById(id);
+		if (opt.isPresent()) {
+			assignment.setId(id);
+			return repo.save(assignment);
+		}
+		throw new NoSuchElementException();
+	}
+
 	@DeleteMapping("/api/assignment/{assignmentId}")
 	public void deleteAssignmentById(@PathVariable("assignmentId") int id) {
 		repo.deleteById(id);
