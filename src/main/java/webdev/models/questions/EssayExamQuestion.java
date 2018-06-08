@@ -11,5 +11,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "JOINED_ESSAY_QUESTION")
 public class EssayExamQuestion extends BaseExamQuestion {
-
+	public EssayExamQuestion() {
+		super();
+		this.questionType = QuestionType.Essay;
+	}
 }

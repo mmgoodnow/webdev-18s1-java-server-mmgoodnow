@@ -1,19 +1,10 @@
 package webdev.models.questions;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.util.Objects;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import webdev.models.widgets.Exam;
+
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "JOINED_BASE_QUESTION")
@@ -23,13 +14,23 @@ public class BaseExamQuestion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+
 	private int points;
 	private String title;
 	private String description;
 
+	QuestionType questionType;
+
 	@ManyToOne
 	@JsonIgnore
 	private Exam exam;
+
+	BaseExamQuestion() {
+		this.id = 0;
+		this.points = 0;
+		this.title = "";
+		this.description = "";
+	}
 
 	public int getId() {
 		return id;

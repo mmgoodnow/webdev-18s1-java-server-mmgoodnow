@@ -56,6 +56,13 @@ GET http://sage.local:8080/api/lesson/622/widget
 
 ###
 
-GET http://sage.local:8080/api/assignment
+GET http://sage.local:8080/api/exam
 
 ###
+
+POST http://sage.local:8080/api/exam/22/truefalse
+Content-Type: application/json
+
+{
+    "title": "true false"
+}

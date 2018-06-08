@@ -9,6 +9,13 @@ public class MultipleChoiceExamQuestion extends BaseExamQuestion {
 	private String options;
 	private int correctOption;
 
+	public MultipleChoiceExamQuestion() {
+		super();
+		this.options = "";
+		this.correctOption = 0;
+		this.questionType = QuestionType.Choice;
+	}
+
 	public String getOptions() {
 		return options;
 	}

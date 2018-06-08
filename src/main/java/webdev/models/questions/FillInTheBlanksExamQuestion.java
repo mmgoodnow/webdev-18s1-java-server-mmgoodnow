@@ -1,14 +1,19 @@
 package webdev.models.questions;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "JOINED_FILL_IN_THE_BLANK_QUESTION")
 public class FillInTheBlanksExamQuestion extends BaseExamQuestion {
-	@Column(name = "BLANKS", nullable = false)
+
 	private String blanks;
+
+	public FillInTheBlanksExamQuestion() {
+		super();
+		this.blanks = "";
+		this.questionType = QuestionType.Blanks;
+	}
 
 	public String getBlanks() {
 		return blanks;

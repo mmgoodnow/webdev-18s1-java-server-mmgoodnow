@@ -8,8 +8,14 @@ import javax.persistence.Table;
 @Table(name = "JOINED_TRUE_OR_FALSE_QUESTION")
 public class TrueOrFalseExamQuestion extends BaseExamQuestion {
 
-	@Column(name = "IS_TRUE", nullable = false)
+	@Column(nullable = false)
 	private Boolean correctAnswer;
+
+	public TrueOrFalseExamQuestion() {
+		super();
+		this.correctAnswer = false;
+		this.questionType = QuestionType.TrueFalse;
+	}
 
 	public Boolean getCorrectAnswer() {
 		return correctAnswer;
