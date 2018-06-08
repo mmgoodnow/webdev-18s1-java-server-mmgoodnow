@@ -59,6 +59,7 @@ public class ExamService {
 		Optional<Exam> opt = repo.findById(id);
 		if (opt.isPresent()) {
 			exam.setId(id);
+			exam.setLesson(opt.get().getLesson());
 			return repo.save(exam);
 		}
 		throw new NoSuchElementException();

@@ -55,3 +55,7 @@ Content-Type: application/json
 GET http://sage.local:8080/api/lesson/622/widget
 
 ###
+
+GET http://sage.local:8080/api/assignment
+
+###

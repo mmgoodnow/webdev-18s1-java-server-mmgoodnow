@@ -60,6 +60,7 @@ public class AssignmentService {
 		Optional<Assignment> opt = repo.findById(id);
 		if (opt.isPresent()) {
 			assignment.setId(id);
+			assignment.setLesson(opt.get().getLesson());
 			return repo.save(assignment);
 		}
 		throw new NoSuchElementException();
