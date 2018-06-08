@@ -19,7 +19,7 @@ public class BaseExamQuestion {
 	private String title;
 	private String description;
 
-	QuestionType questionType;
+	private QuestionType questionType;
 
 	@ManyToOne
 	@JsonIgnore
@@ -90,5 +90,13 @@ public class BaseExamQuestion {
 		if (!(o instanceof BaseExamQuestion)) return false;
 		BaseExamQuestion that = (BaseExamQuestion) o;
 		return id == that.id;
+	}
+
+	public QuestionType getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(QuestionType questionType) {
+		this.questionType = questionType;
 	}
 }

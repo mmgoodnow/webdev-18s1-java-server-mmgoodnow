@@ -64,5 +64,12 @@ POST http://sage.local:8080/api/exam/22/truefalse
 Content-Type: application/json
 
 {
-    "title": "true false"
+    "title": "true false",
+    "correctAnswer": true
 }
+
+###
+
+GET http://sage.local:8080/api/truefalse/2
+
+###
