@@ -35,8 +35,10 @@ public class Exam extends Widget {
 	}
 
 	public void removeQuestion(BaseExamQuestion q) {
-		this.questions.remove(q);
-		q.setExam(null);
+		if (this.questions.contains(q)) {
+			this.questions.remove(q);
+			q.setExam(null);
+		}
 	}
 
 }

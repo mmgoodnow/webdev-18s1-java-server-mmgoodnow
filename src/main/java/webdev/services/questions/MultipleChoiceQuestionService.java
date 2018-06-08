@@ -44,8 +44,12 @@ public class MultipleChoiceQuestionService {
 		Optional<MultipleChoiceExamQuestion> opt = repo.findById(id);
 		if (opt.isPresent()) {
 			MultipleChoiceExamQuestion oldQuestion = opt.get();
-			newQuestion.setId(id);
-			return repo.save(newQuestion);
+			oldQuestion.setCorrectOption(newQuestion.getCorrectOption());
+			oldQuestion.setOptions(newQuestion.getOptions());
+			oldQuestion.setDescription(newQuestion.getDescription());
+			oldQuestion.setPoints(newQuestion.getPoints());
+			oldQuestion.setTitle(newQuestion.getTitle());
+			return repo.save(oldQuestion);
 		}
 		throw new NoSuchElementException();
 	}

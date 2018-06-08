@@ -43,8 +43,10 @@ public class EssayQuestionService {
 		Optional<EssayExamQuestion> opt = repo.findById(id);
 		if (opt.isPresent()) {
 			EssayExamQuestion oldQuestion = opt.get();
-			newQuestion.setId(id);
-			return repo.save(newQuestion);
+			oldQuestion.setDescription(newQuestion.getDescription());
+			oldQuestion.setPoints(newQuestion.getPoints());
+			oldQuestion.setTitle(newQuestion.getTitle());
+			return repo.save(oldQuestion);
 		}
 		throw new NoSuchElementException();
 	}

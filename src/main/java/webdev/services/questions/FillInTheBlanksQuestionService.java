@@ -46,8 +46,11 @@ public class FillInTheBlanksQuestionService {
 		Optional<FillInTheBlanksExamQuestion> opt = repo.findById(id);
 		if (opt.isPresent()) {
 			FillInTheBlanksExamQuestion oldQuestion = opt.get();
-			newQuestion.setId(id);
-			return repo.save(newQuestion);
+			oldQuestion.setBlanks(newQuestion.getBlanks());
+			oldQuestion.setDescription(newQuestion.getDescription());
+			oldQuestion.setPoints(newQuestion.getPoints());
+			oldQuestion.setTitle(newQuestion.getTitle());
+			return repo.save(oldQuestion);
 		}
 		throw new NoSuchElementException();
 	}

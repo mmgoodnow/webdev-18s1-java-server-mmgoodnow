@@ -43,9 +43,13 @@ public class TrueOrFalseQuestionService {
 		                                                       newQuestion) {
 		Optional<TrueOrFalseExamQuestion> opt = repo.findById(id);
 		if (opt.isPresent()) {
-			TrueOrFalseExamQuestion oldQuestion = opt.get();
 			newQuestion.setId(id);
-			return repo.save(newQuestion);
+			TrueOrFalseExamQuestion oldQuestion = opt.get();
+			oldQuestion.setCorrectAnswer(newQuestion.getCorrectAnswer());
+			oldQuestion.setDescription(newQuestion.getDescription());
+			oldQuestion.setPoints(newQuestion.getPoints());
+			oldQuestion.setTitle(newQuestion.getTitle());
+			return repo.save(oldQuestion);
 		}
 		throw new NoSuchElementException();
 	}
