@@ -14,7 +14,7 @@ public class TrueOrFalseExamQuestion extends BaseExamQuestion {
 	public TrueOrFalseExamQuestion() {
 		super();
 		this.correctAnswer = false;
-		this.questionType = QuestionType.TrueFalse;
+		this.setQuestionType(QuestionType.TrueFalse);
 	}
 
 	public Boolean getCorrectAnswer() {

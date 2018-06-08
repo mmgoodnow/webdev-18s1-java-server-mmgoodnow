@@ -13,6 +13,6 @@ import javax.persistence.Table;
 public class EssayExamQuestion extends BaseExamQuestion {
 	public EssayExamQuestion() {
 		super();
-		this.questionType = QuestionType.Essay;
+		this.setQuestionType(QuestionType.Essay);
 	}
 }

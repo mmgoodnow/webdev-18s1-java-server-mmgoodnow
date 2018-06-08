@@ -12,7 +12,7 @@ public class FillInTheBlanksExamQuestion extends BaseExamQuestion {
 	public FillInTheBlanksExamQuestion() {
 		super();
 		this.blanks = "";
-		this.questionType = QuestionType.Blanks;
+		this.setQuestionType(QuestionType.Blanks);
 	}
 
 	public String getBlanks() {

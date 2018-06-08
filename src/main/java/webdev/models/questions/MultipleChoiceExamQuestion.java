@@ -13,7 +13,7 @@ public class MultipleChoiceExamQuestion extends BaseExamQuestion {
 		super();
 		this.options = "";
 		this.correctOption = 0;
-		this.questionType = QuestionType.Choice;
+		this.setQuestionType(QuestionType.Choice);
 	}
 
 	public String getOptions() {
